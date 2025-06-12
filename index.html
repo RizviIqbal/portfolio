@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rizvi Iqbal | Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome CDN for icons -->
+  <script src="https://kit.fontawesome.com/yourkitid.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(ellipse at top left, #f7f8fd, #e6edfa);
+    color: #1e293b;
+    overflow-x: hidden;
+    transition: background 0.4s, color 0.4s;
+    }
+
+    body.dark {
+    background: radial-gradient(ellipse at top left, #0f172a, #1e293b);
+    color: #e2e8f0;
+    }
+
+    .profile-image {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Layout */
+
+    nav {
+      position: fixed;
+      top: 50%;
+      left: 40px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      z-index: 1000;
+    }
+
+    nav a {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: #94a3b8;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      padding: 10px 16px;
+      border-radius: 50px;
+      background: transparent;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 0 transparent;
+      cursor: pointer;
+    }
+
+    nav a i {
+      font-size: 1.3rem;
+    }
+
+    nav a.active,
+    nav a:hover {
+      background: #3b82f6;
+      color: white;
+      box-shadow: 0 4px 12px rgb(59 130 246 / 0.6);
+    }
+
+    body.dark nav a {
+      color: #94a3b8;
+    }
+
+    body.dark nav a.active,
+    body.dark nav a:hover {
+      background: #2563eb;
+      color: white;
+      box-shadow: 0 4px 12px rgb(37 99 235 / 0.8);
+    }
+
+    main {
+      max-width: 900px;
+      margin-left: 140px;
+      padding: 80px 40px 100px 40px;
+    }
+
+    section {
+      margin-bottom: 120px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+      scroll-margin-top: 100px;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h1,
+    h2 {
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      margin-bottom: 15px;
+      color: #1e293b;
+    }
+
+    body.dark h1,
+    body.dark h2 {
+      color: #e2e8f0;
+    }
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .role {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #64748b;
+      margin-bottom: 70px;
+      letter-spacing: 0.04em;
+    }
+
+    body.dark .role {
+      color: #94a3b8;
+    }
+
+    p,
+    .skills li {
+      font-weight: 400;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #334155;
+      max-width: 650px;
+    }
+
+    body.dark p,
+    body.dark .skills li {
+      color: #cbd5e1;
+    }
+
+    ul.skills {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      max-width: 650px;
+    }
+
+    ul.skills li {
+      background: #e0e7ff;
+      color: #3b82f6;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgb(147 197 253 / 0.6);
+      transition: all 0.3s ease;
+    }
+
+    body.dark ul.skills li {
+      background: #2563eb;
+      color: white;
+      box-shadow: 0 2px 10px rgb(37 99 235 / 0.8);
+    }
+
+    /* Projects */
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      max-width: 900px;
+    }
+
+    .project-card {
+      background: white;
+      padding: 22px 28px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgb(99 99 99 / 0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 20px 40px rgb(99 99 99 / 0.2);
+    }
+
+    body.dark .project-card {
+      background: #1e293b;
+      box-shadow: 0 10px 30px rgb(59 130 246 / 0.2);
+    }
+
+    body.dark .project-card:hover {
+      box-shadow: 0 20px 40px rgb(37 99 235 / 0.5);
+    }
+
+    .project-title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #1e293b;
+      margin-bottom: 8px;
+    }
+
+    body.dark .project-title {
+      color: #e2e8f0;
+    }
+
+    .project-desc {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #475569;
+      flex-grow: 1;
+    }
+
+    body.dark .project-desc {
+      color: #94a3b8;
+    }
+
+    /* Contact */
+
+    .contact-links {
+      display: flex;
+      gap: 25px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .contact-links a {
+      font-size: 1.1rem;
+      color: #3b82f6;
+      font-weight: 600;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s ease;
+    }
+
+    body.dark .contact-links a {
+      color: #60a5fa;
+    }
+
+    .contact-links a:hover {
+      color: #1e40af;
+      text-decoration: underline;
+    }
+
+    /* Icons for contact */
+    .contact-links a i {
+      font-size: 1.3rem;
+    }
+
+    footer {
+      text-align: center;
+      font-weight: 500;
+      padding: 15px;
+      border-top: 1px solid #cbd5e1;
+      color: #64748b;
+      user-select: none;
+    }
+
+    body.dark footer {
+      border-top-color: #475569;
+      color: #94a3b8;
+    }
+
+    /* Theme toggle button */
+    #theme-toggle {
+      position: fixed;
+      bottom: 30px;
+      right: 40px;
+      background: #3b82f6;
+      color: white;
+      font-weight: 700;
+      border: none;
+      padding: 14px 26px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-size: 1.05rem;
+      box-shadow: 0 8px 20px rgb(59 130 246 / 0.6);
+      transition: background 0.3s ease;
+      user-select: none;
+      z-index: 1000;
+      letter-spacing: 0.06em;
+    }
+
+    #theme-toggle:hover {
+      background: #2563eb;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 850px) {
+      nav {
+        left: 15px;
+      }
+      main {
+        margin-left: 100px;
+        padding: 70px 20px 90px 20px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        left: 0;
+        right: 0;
+        height: 60px;
+        flex-direction: row;
+        justify-content: center;
+        background: #f0f5ff;
+        box-shadow: 0 -1px 10px rgb(59 130 246 / 0.2);
+        border-radius: 0;
+        padding: 0;
+        gap: 0;
+      }
+
+      body.dark nav {
+        background: #1e293b;
+        box-shadow: 0 -1px 10px rgb(37 99 235 / 0.4);
+      }
+
+      nav a {
+        flex-grow: 1;
+        padding: 0;
+        justify-content: center;
+        font-size: 0.85rem;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      nav a i {
+        font-size: 1.4rem;
+      }
+
+      nav a.active,
+      nav a:hover {
+        box-shadow: none;
+        background: transparent;
+        color: #2563eb;
+        border-bottom: 3px solid #2563eb;
+      }
+
+      body.dark nav a.active,
+      body.dark nav a:hover {
+        color: #60a5fa;
+        border-bottom-color: #60a5fa;
+      }
+
+      main {
+        margin-left: 0;
+        padding: 40px 20px 90px 20px;
+      }
+
+      #theme-toggle {
+        right: 20px;
+        bottom: 80px;
+        padding: 12px 20px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav aria-label="Primary navigation">
+    <a href="#home" class="active" aria-current="page"><i class="fas fa-home"></i><span class="nav-text">Home</span></a>
+    <a href="#about"><i class="fas fa-user"></i><span class="nav-text">About</span></a>
+    <a href="#skills"><i class="fas fa-code"></i><span class="nav-text">Skills</span></a>
+    <a href="#projects"><i class="fas fa-briefcase"></i><span class="nav-text">Projects</span></a>
+    <a href="#contact"><i class="fas fa-envelope"></i><span class="nav-text">Contact</span></a>
+  </nav>
+
+  <main>
+    <section id="home" tabindex="0">
+      <img src="rizvi.jpeg" alt="Rizvi Iqbal" class="profile-image" />
+      <h1>Rizvi Iqbal</h1>
+      <p class="role">Computer Science Engineering Student</p>
+      <p>Hello! I’m an optimistic visionary software engineer, passionate about crafting innovative solutions to build a futuristic world where technology empowers humanity.</p>
+    </section>
+
+    <section id="about" tabindex="0">
+      <h2>About Me</h2>
+      <p>I am a dedicated computer science engineering student focused on mastering software development with a futuristic mindset. Driven by curiosity and optimism, I aspire to design software that redefines possibilities and impacts the future positively.</p>
+    </section>
+
+    <section id="skills" tabindex="0">
+      <h2>Skills</h2>
+      <ul class="skills">
+        <li>Python</li>
+        <li>PHP</li>
+        <li>SQL</li>
+        <li>JavaScript</li>
+        <li>HTML & CSS</li>
+        <li>Git</li>
+      </ul>
+    </section>
+
+    <section id="projects" tabindex="0">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <!-- Placeholder project cards -->
+        <div class="project-card">
+          <h3 class="project-title">Project Placeholder 1</h3>
+          <p class="project-desc">No projects yet — but stay tuned! Exciting things coming soon.</p>
+        </div>
+        <div class="project-card">
+          <h3 class="project-title">Project Placeholder 2</h3>
+          <p class="project-desc">This space will soon showcase innovative work and creative solutions.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" tabindex="0">
+      <h2>Contact</h2>
+      <div class="contact-links">
+        <a href="mailto:rizviiqbal1197@gmail.com" aria-label="Send email"><i class="fas fa-envelope"></i> rizviiqbal1197@gmail.com</a>
+        <a href="mailto:rizvi.iqbal@g.bracu.ac.bd" aria-label="Send email"><i class="fas fa-envelope"></i> rizvi.iqbal@g.bracu.ac.bd</a>
+        <a href="https://github.com/RizviIqbal" target="_blank" rel="noopener" aria-label="GitHub Profile"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <button id="theme-toggle" aria-label="Toggle dark and light theme">Dark Mode</button>
+
+  <footer>
+    &copy; 2025 Rizvi Iqbal. All rights reserved.
+  </footer>
+
+  <script>
+    // Scroll reveal animations
+    const sections = document.querySelectorAll('section');
+    function revealSections() {
+      sections.forEach((section) => {
+        const top = section.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (top < windowHeight * 0.85) {
+          section.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', revealSections);
+    window.addEventListener('load', revealSections);
+
+    // Scrollspy navigation
+    const navLinks = document.querySelectorAll('nav a');
+    const sectionMap = {};
+    navLinks.forEach(link => {
+      const id = link.getAttribute('href').substring(1);
+      const sec = document.getElementById(id);
+      if (sec) sectionMap[id] = sec;
+    });
+
+    function onScrollSpy() {
+      const scrollPos = window.scrollY + window.innerHeight / 3;
+      let currentId = 'home';
+      for (const id in sectionMap) {
+        const sectionTop = sectionMap[id].offsetTop;
+        if (scrollPos >= sectionTop) currentId = id;
+      }
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href').substring(1) === currentId);
+      });
+    }
+    window.addEventListener('scroll', onScrollSpy);
+
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    function setTheme(dark) {
+      if (dark) {
+        body.classList.add('dark');
+        themeToggle.textContent = 'Light Mode';
+      } else {
+        body.classList.remove('dark');
+        themeToggle.textContent = 'Dark Mode';
+      }
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      setTheme(!body.classList.contains('dark'));
+    });
+
+    // Load saved theme on page load
+    window.addEventListener('load', () => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        setTheme(true);
+      }
+    });
+  </script>
+</body>
+
+</html>
